@@ -1,12 +1,11 @@
 package ptr.store.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 
 /**
  * Order entity
@@ -18,6 +17,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode(exclude = "customer")
+@ToString(exclude = "customer")
 @Entity
 @Table(name = "Orders")
 public class Order implements Serializable {
@@ -32,4 +33,13 @@ public class Order implements Serializable {
     @Column
     private Double amount;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    private Collection<OrderItem> orderItems;
+
+    @ManyToOne
+    private Customer customer;
+    
 }

@@ -13,8 +13,8 @@ import ptr.store.model.Order;
 
 /**
  * Main application REST controller for managing and redirect user requests
- * located at context 'store/management'  , default page is store/management/salary
- * @see @method salary()
+ * located at context 'store/management' 
+ *
  *
  * */
 @RestController
@@ -39,13 +39,12 @@ public class StoreController {
 
     @GetMapping(value = "/order", produces = MediaType.APPLICATION_JSON_VALUE)
     public Order getLoans(@RequestParam(value="name", required = false) String name) {
-
+        // TODO rewrite 
         Order order = Order.builder().name(name).amount(100.5).build();
-        log.info(" response : {} ", order);
+        log.trace(" response : {} ", order);
         Order tempOrder = orderRepository.findOne(100L);
-        log.info(" order temp : {} ", tempOrder);
+        log.trace(" order temp : {} ", tempOrder);
         return order;
     }
-
-
+    
 }

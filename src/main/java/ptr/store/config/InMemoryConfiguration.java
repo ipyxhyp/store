@@ -27,7 +27,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories("ptr.store.dao")
-@ComponentScan("ptr.store.dao")
+@ComponentScan({"ptr.store.dao", "ptr.store.service"})
 public class InMemoryConfiguration {
 
 
@@ -53,10 +53,8 @@ public class InMemoryConfiguration {
 
         Properties properties = new Properties();
         properties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
-//        properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
         properties.put("hibernate.show_sql", true);
         properties.put("hibernate.hbm2ddl.auto", "create");
-//        properties.put("hibernate.hbm2ddl.import_files", "");
 
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
         localContainerEntityManager.setJpaVendorAdapter(hibernateJpaVendorAdapter);
